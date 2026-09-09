@@ -19,7 +19,6 @@ jobs:
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
-          cache: pnpm
       - run: corepack enable
       - run: corepack prepare pnpm@11.8.0 --activate
       - run: pnpm install --frozen-lockfile
