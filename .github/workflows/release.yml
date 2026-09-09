@@ -23,9 +23,14 @@ jobs:
       - run: corepack prepare pnpm@11.8.0 --activate
       - run: pnpm install --frozen-lockfile
       - run: pnpm check
-      - run: npm publish --access public --provenance
+      - name: Publish to npm
+        if: ${{ secrets.NPM_TOKEN != '' }}
+        run: npm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Report skipped npm publication
+        if: ${{ secrets.NPM_TOKEN == '' }}
+        run: echo "::warning::NPM_TOKEN is not configured; npm publication was skipped."
       - run: gh release create "${GITHUB_REF_NAME}" --generate-notes
         env:
           GH_TOKEN: ${{ github.token }}
