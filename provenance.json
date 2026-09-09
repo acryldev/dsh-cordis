@@ -1,0 +1,23 @@
+{
+  "extractedAt": "2026-09-09",
+  "acryl": {
+    "repository": "https://github.com/acryldev/acryl",
+    "commit": "b23b53b543746eed8df126c65f47bfc0a55519f8",
+    "paths": [
+      "acryl-harness-runtime/src/coding-capabilities.ts",
+      "acryl-harness-runtime/src/index.ts"
+    ]
+  },
+  "deepseekHarness": {
+    "repository": "https://github.com/deepseek-ai/deepseek-harness.git",
+    "commit": "5dda764ed3aa172535a7967b06ff95d9cbfe536a",
+    "sourceVersion": "0.1.5-alpha.1",
+    "runtimePackageVersion": "0.1.5-alpha.1"
+  },
+  "copied": [
+    "composition/base.patch.yml",
+    "presets/"
+  ],
+  "strategy": "Copy composition and presets; consume pinned published DSH packages. ACRYL source retained."
+}
+

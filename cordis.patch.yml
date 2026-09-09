@@ -1,0 +1,6 @@
+# Safe to install into an existing DSH profile: explicitly enable only in an
+# engine slot with no competing DSH base services in the same resolution realm.
+- insert:
+    - id: dsh-engine
+      name: dsh-cordis
+      disabled: true
