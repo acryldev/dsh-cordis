@@ -38,10 +38,18 @@ withdraws those providers through normal Cordis lifecycle disposal.
 
 ## Source and provenance
 
-The repository includes `deepseek-harness/` as a pinned Git submodule for
-source inspection. Published DSH dependencies are pinned to `0.1.5-alpha.1`.
-The extracted composition, presets, licenses, and exact source records are in
-[`provenance.json`](./provenance.json).
+The repository includes `deepseek-harness/` as a pinned Git submodule from
+<https://github.com/deepseek-ai/deepseek-harness>. It is the source reference
+for the wrapped engine. `pnpm run upstream:sync` restores its recorded pin;
+`pnpm run upstream:update` deliberately advances it to upstream and leaves the
+new gitlink for review and commit. Published DSH dependencies stay version-pinned
+until that source update has been tested and released in a new `dsh-cordis`
+version. The extracted composition, presets, licenses, and exact source records
+are in [`provenance.json`](./provenance.json).
+
+The submodule is not loaded as a second runtime. `dsh-cordis` wraps the matching
+published DeepSeek Harness packages as one Cordis plugin in the host's existing
+plugin tree.
 
 This is the first DSH engine package for ACRYL's future selectable engine host.
 It does not yet provide Pi integration, engine switching commands, or

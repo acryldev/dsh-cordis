@@ -39,7 +39,9 @@
   "scripts": {
     "test": "node --test --test-concurrency=1 test/*.test.mjs",
     "check": "node --test --test-concurrency=1 test/*.test.mjs",
-    "prepublishOnly": "node --test --test-concurrency=1 test/*.test.mjs"
+    "prepublishOnly": "node --test --test-concurrency=1 test/*.test.mjs",
+    "upstream:sync": "git submodule update --init --recursive",
+    "upstream:update": "git submodule update --remote --merge deepseek-harness"
   },
   "dependencies": {
     "@deepseek-ai/cordis-plugin-hmr": "1.0.17",
