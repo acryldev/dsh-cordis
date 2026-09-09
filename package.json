@@ -1,6 +1,6 @@
 {
   "name": "dsh-cordis",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "DeepSeek Harness engine as a lifecycle-owned Cordis plugin, extracted from ACRYL.",
   "type": "module",
   "license": "MIT",
