@@ -42,12 +42,15 @@ withdraws those providers through normal Cordis lifecycle disposal.
 it. The package carries the DSH engine composition; the host receives ordinary
 Cordis services rather than an engine-specific global singleton.
 
-- **Stable capability boundaries.** Consumers ask for `sessions`, `agents`,
-  `tools`, and other service contracts. They do not import a concrete DSH
-  provider to obtain those capabilities.
-- **Dependencies made explicit.** A plugin declares what it requires. Missing
-  dependencies remain pending instead of being hidden behind startup ordering
-  assumptions or timing retries.
+- **Dependency inversion and separated interfaces.** Consumers ask for
+  `sessions`, `agents`, `tools`, and other service contracts. They do not
+  import a concrete DSH provider to obtain those capabilities.
+- **Seams instead of rewrites.** The engine is a capability seam: a host can
+  observe, replace, or remove the DSH provider without rewriting the consumers
+  that rely on its services.
+- **Orthogonality over hidden coupling.** A plugin declares what it requires.
+  Missing dependencies remain pending instead of being hidden behind startup
+  ordering assumptions, timing retries, or a global initialization sequence.
 - **One owner for every live contribution.** Loader entries, service providers,
   listeners, timers, subprocesses, and subscriptions belong to a Fiber. The
   owner also owns their cleanup.
@@ -57,15 +60,21 @@ Cordis services rather than an engine-specific global singleton.
 - **Configuration is composition.** Stable Loader IDs select the engine and its
   configuration. Changing a deployment choice does not require scattering
   provider switches through application code.
+- **YAGNI at the integration boundary.** The package reuses DSH's session,
+  agent, tool, approval, and persistence capabilities instead of introducing
+  another agent loop, event bus, or lifecycle framework.
 - **Durable facts stay durable.** Sessions and replay-critical work are owned
   by the DSH session model. Live events coordinate a running process; they are
   not treated as the only record of work.
-- **Complexity stays at the edge.** The package absorbs DSH composition,
-  dependency resolution, and lifecycle mechanics, leaving callers with a
-  smaller service-oriented surface.
-- **Replacement is tested, not assumed.** The release tests cover missing
-  dependencies, real Loader activation, provider removal, and repeated
-  activation with the host still alive.
+- **Information hiding and deep modules.** The package absorbs DSH composition,
+  dependency resolution, and lifecycle mechanics, leaving callers with a small
+  service-oriented surface rather than a collection of setup details.
+- **Fail fast, contain failure.** Invalid configuration and missing services
+  fail before partial activation. Loader replacement keeps a working provider
+  available when a candidate cannot activate.
+- **Refactor-safe change.** Replacement is tested, not assumed: the release
+  suite covers missing dependencies, real Loader activation, provider removal,
+  and repeated activation with the host still alive.
 
 These are practical constraints on the package, not slogans: the source and
 tests are organized around them so an engine can be installed, used, removed,
